@@ -1,0 +1,3 @@
+# Django_mysite
+Learning some Django. And also PyCharm. And GitHub.
+Maybe that's a little much...
