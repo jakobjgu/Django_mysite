@@ -158,9 +158,3 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-.idea/.gitignore
-.idea/Django_mysite.iml
-.idea/inspectionProfiles/
-.idea/misc.xml
-.idea/modules.xml
-mysite/
