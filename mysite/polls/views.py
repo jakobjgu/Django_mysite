@@ -1,22 +1,27 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from django.template import loader
+from django.shortcuts import render
+
 from .models import Question
 
 def index(request):
-    return HttpResponse("Hello World. You're at the polls index.")
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls/index.html', context)
 
 
 def detail(request, question_id):
-    q = Question.objects.get(pk=question_id)
-    question_txt = q.question_text
-    response_text = f"""You're looking at question {question_id}.
-                         The question you are being asked is: {question_txt}
-                      """
-    return HttpResponse(response_text)
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'polls/detail.html', {'question': question})
 
 
 def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
+    response = "You're looking at the results of question %s." %question_id
+    context = {'response': response}
+    return render(request, 'polls/results.html', context)
 
 
 def vote(request, question_id):

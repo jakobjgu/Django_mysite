@@ -1,0 +1,7 @@
+{% if response %}
+    <ul>
+    <li><a href="/polls/{{ question.id }}/results/">{{ response }}</a></li>
+    </ul>
+{% else %}
+    <p>Something went wrong.</p>
+{% endif %}
